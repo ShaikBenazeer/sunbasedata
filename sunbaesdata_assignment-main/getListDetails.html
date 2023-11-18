@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Entities List</title>
+    <style>
+        body {
+            background-color: #f5f5f5; 
+            font-family: Arial, sans-serif;
+        }
+
+        h2 {
+            color: #333; 
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd; 
+        }
+
+        th {
+            background-color: #4CAF50; 
+            color: white;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9; 
+        }
+
+        a.button {
+            display: inline-block;
+            padding: 8px 16px;
+            text-align: center;
+            text-decoration: none;
+            background-color: #3498db; 
+            color: white;
+            border-radius: 4px;
+        }
+
+        a.button.delete {
+            background-color: #e74c3c; 
+        }
+
+        a.button.update {
+            background-color: #2ecc71; 
+        }
+
+        .create-button {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .create-button a.button {
+            background-color: #3498db; 
+        }
+     </style>
+</head>
+<body>
+    <h2>Persons List</h2>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>UUID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Street</th>
+                <th>Address</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="entity : ${entityList}">
+                <td th:text="${entity.uuid}">UUID</td>
+                <td th:text="${entity.first_name}">First Name</td>
+                <td th:text="${entity.last_name}">Last Name</td>
+                <td th:text="${entity.street}">Street</td>
+                <td th:text="${entity.address}">Address</td>
+                <td th:text="${entity.city}">City</td>
+                <td th:text="${entity.state}">State</td>
+                <td th:text="${entity.email}">Email</td>
+                <td th:text="${entity.phone}">Phone</td>
+                <td><a th:href="@{'/updateRecord?uuid=' + ${entity.uuid}}" class="button update">Update</a></td>
+                <td><a th:href="@{'/deleteRecord?uuid=' + ${entity.uuid}}" class="button delete">Delete</a></td>
+            </tr>
+        </tbody>
+    </table>
+        <div class="create-button">
+        <a th:href="@{'/create'}" class="button">Create New User</a>
+    </div>
+</body>
+</html>
